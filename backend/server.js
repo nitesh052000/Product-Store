@@ -17,6 +17,25 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
+app.use(async (req, res, next) => {
+  try {
+    const decision = await aj.protect(req, { requested: 5 }); // Deduct 5 tokens from the bucket
+    console.log("Arcjet decision", decision);
+    if (decision.isDenied()) {
+      if (decision.reason.isRateLimit()) {
+        res.status(429)(JSON.stringify({ error: "Too Many Requests" }));
+      } else if (decision.reason.isBot()) {
+        res.status(403)(JSON.stringify({ error: "No bots allowed" }));
+      } else {
+        res.status(403)(JSON.stringify({ error: "Forbidden" }));
+      }
+      return;
+    }
+
+    next();
+  } catch (error) {}
+});
+
 app.use("/api/products", productRoutes);
 
 console.log("sql", sql);

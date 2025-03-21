@@ -58,10 +58,14 @@ export const getProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
-  try {
-    const deletedProduct = await sql` DELETE FROM product WHERE id=${id}`;
+  console.log("id", id);
 
-    console.log("delted successfully", products);
+  try {
+    const deletedProduct =
+      await sql`DELETE FROM products WHERE id=${id} RETURNING *
+    `;
+
+    console.log("delted successfully", deleteProduct);
 
     res.status(200).json({ success: true, data: deletedProduct });
   } catch (error) {
