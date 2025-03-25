@@ -1,8 +1,11 @@
 import { Palette } from "lucide-react";
 import React from "react";
 import { THEMES } from "../constants/theme";
+import { useThemeStore } from "../store/useThemeStore";
 
 const ThemeSelector = () => {
+  const { theme, setTheme } = useThemeStore();
+
   return (
     <div className="dropdown">
       <button tabIndex={0} role="button" className="btn m-1">
@@ -17,10 +20,14 @@ const ThemeSelector = () => {
         {THEMES.map((theme) => (
           <button
             key={theme.name}
-            className="w-full flex items-center gap-2 transition-colors px-2 py-2"
+            className={`
+                w-full px-2 py-1 rounded-xl flex items-center gap-1 transition-colors
+                ${theme === theme.name ? "bg-green" : "hover:bg-base-content/5"}
+              `}
+            onClick={() => setTheme(theme.name)}
           >
-            <Palette className="size-4" />
-            <span>{theme.label}</span>
+            <Palette className="size-4 mr-2" />
+            <span className=" mr-2">{theme.label}</span>
             {/* {Theme preview codes} */}
             {theme.colors.map((color, i) => (
               <span
