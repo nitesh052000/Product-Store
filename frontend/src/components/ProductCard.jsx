@@ -8,11 +8,11 @@ const ProductCard = ({ product }) => {
 
   console.log("product", product);
   return (
-    <div className="card bg-base-100 w-96 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+    <div className="card bg-base-100 w-70 shadow-xl hover:shadow-2xl transition-shadow duration-300">
       {/* {Product Image} */}
       <figure className=" relative pt-[56.25%]">
         <img
-          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={product?.image}
           alt={product?.name}
           className="absolute top-0 left-0 w-full h-full object-cover"
         />

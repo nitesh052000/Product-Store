@@ -11,6 +11,7 @@ export const useProductSore = create((set, get) => ({
   products: [],
   loading: false,
   error: null,
+  currentProduct: null,
 
   // form state
   formData: {
@@ -82,13 +83,14 @@ export const useProductSore = create((set, get) => ({
     try {
       const response = await axios.get(`${BASE_URL}/api/products/${id}`);
       console.log("response", response);
-      set({ products: response?.data?.data, error: null });
-    } catch (err) {
-      console.log("error in fetch product", err);
-      toast.error("Something went wrong");
-      if (err.status == 429)
-        set({ error: "Rate limit exceeded", products: [] });
-      else set({ error: "Something went wrong", products: [] });
+      set({
+        currentProduct: response?.data?.data,
+        formData: response?.data?.data,
+        error: null,
+      });
+    } catch (error) {
+      console.log("error in fetch product", error);
+      set({ error: "Something went wrong", currentProduct: null });
     } finally {
       set({ loading: false });
     }

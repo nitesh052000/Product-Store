@@ -5,11 +5,6 @@ import { useProductSore } from "../store/useProductStore";
 const AddProductModal = () => {
   const { addProduct, loading, formData, setFormData } = useProductSore();
 
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-
-    console.log("event", formData);
-  };
   return (
     <div>
       <dialog className="modal" id="add_product_modal">
@@ -23,7 +18,7 @@ const AddProductModal = () => {
 
           <h1 className=" font-bold text-xl mb-8">Add New Product</h1>
 
-          <form onSubmit={handlesubmit}>
+          <form onSubmit={addProduct}>
             <div className="grid gap-6">
               {/* {Product Name Input} */}
               <div className="form-control">
