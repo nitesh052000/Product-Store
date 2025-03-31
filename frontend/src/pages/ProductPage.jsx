@@ -79,10 +79,11 @@ const ProductPage = () => {
               <h2 className=" card-title text-2xl mb-6">Edit Product</h2>
 
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   console.log("submit", e);
                   e.preventDefault();
-                  updateProduct(id);
+                  await updateProduct(id);
+                  navigate("/");
                 }}
                 className="space-y-4 mb-4"
               >
