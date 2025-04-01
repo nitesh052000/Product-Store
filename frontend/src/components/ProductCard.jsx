@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useProductSore } from "../store/useProductStore";
 
 const ProductCard = ({ product }) => {
-  const { deleteProduct } = useProductSore();
+  const { deleteProduct, addToWatchlist, removeFromWatchlist, watchlist } =
+    useProductSore();
 
-  console.log("product", product);
   return (
     <div className="card bg-base-100 w-70 shadow-xl hover:shadow-2xl transition-shadow duration-300">
       {/* {Product Image} */}
@@ -26,6 +26,29 @@ const ProductCard = ({ product }) => {
         </p>
         {/* {Card Actions} */}
         <div className="card-actions justify-end mt-4">
+          {/* <button
+            onClick={() => addToWatchlist(product)}
+            className=" btn btn-primary h-8"
+          >
+            Add to Watchlist
+          </button> */}
+
+          {watchlist.includes(product) ? (
+            <button
+              onClick={() => removeFromWatchlist(product)}
+              className=" btn btn-primary h-8"
+            >
+              Remove from Watchlist
+            </button>
+          ) : (
+            <button
+              onClick={() => addToWatchlist(product)}
+              className=" btn btn-primary h-8"
+            >
+              Add to Watchlist
+            </button>
+          )}
+
           <Link
             to={`/product/${product.id}`}
             className="btn btn-sm btn-info btn-outline"

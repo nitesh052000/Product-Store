@@ -23,8 +23,6 @@ const ProductPage = () => {
     updateProduct,
     deleteProduct,
   } = useProductSore();
-  console.log("formdata", formData);
-  console.log("currentProduct", currentProduct);
 
   const navigate = useNavigate();
 
@@ -80,7 +78,6 @@ const ProductPage = () => {
 
               <form
                 onSubmit={async (e) => {
-                  console.log("submit", e);
                   e.preventDefault();
                   await updateProduct(id);
                   navigate("/");

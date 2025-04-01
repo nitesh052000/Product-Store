@@ -23,6 +23,33 @@ export const useProductSore = create((set, get) => ({
   setFormData: (formData) => set({ formData }),
   resetForm: () => set({ formData: { name: "", price: "", image: "" } }),
 
+  // watchlist state
+  watchlist: [],
+  totalWatchlistProduct: 0,
+
+  addToWatchlist: (product) =>
+    set((state) => {
+      if (!state.watchlist.find((p) => p.id === product.id)) {
+        return {
+          watchlist: [...state.watchlist, product],
+          totalWatchlistProduct: state.totalWatchlistProduct + 1,
+        };
+      }
+      console.log("state", state);
+      return state; // Avoid duplicates
+    }),
+
+  removeFromWatchlist: (product) =>
+    set((state) => {
+      const updatedWatchlist = state.watchlist.filter(
+        (p) => p.id !== product.id
+      );
+      return {
+        watchlist: updatedWatchlist,
+        totalWatchlistProduct: updatedWatchlist.length,
+      };
+    }),
+
   addProduct: async (e) => {
     e.preventDefault();
     set({ loading: true });

@@ -6,7 +6,7 @@ import { useThemeStore } from "./store/useThemeStore";
 
 function App() {
   const { theme } = useThemeStore();
-  console.log("theme", theme);
+
   return (
     <div
       className=" min-h-screen bg-black transition-colors duration-300"

@@ -7,13 +7,9 @@ import AddProductModal from "../components/AddProductModal";
 const HomePage = () => {
   const { products, loading, error, fetchProducts } = useProductSore();
 
-  console.log("loading", loading);
-
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-
-  console.log("products", products);
 
   return (
     <main className=" max-w-6xl  mx-auto px-4 py-8">
@@ -28,7 +24,7 @@ const HomePage = () => {
           Add Product
         </button>
         <button>
-          <RefreshCwIcon className="size-5" />
+          <RefreshCwIcon onClick={() => fetchProducts()} className="size-5" />
         </button>
       </div>
 
